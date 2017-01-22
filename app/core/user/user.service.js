@@ -4,10 +4,9 @@
     angular
     .module('core.user')
     .factory('User', [
-        '$http',
         '$q',
         '$timeout',
-        function User($http, $q, $timeout) {
+        function User($q, $timeout) {
 
             // datos del usuario hardcoded
             var authUser = {
@@ -55,6 +54,7 @@
             function handleSuccess(res) {
                 // Con $http los datos están en res.data
                 // Con jQuery los datos están en res
+                res.success = true;
                 return res.data || res;
             }
 

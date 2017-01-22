@@ -8,7 +8,8 @@
         controller: [
             '$rootScope',
             'User',
-            function HomeController($rootScope, User) {
+            'Flash',
+            function HomeController($rootScope, User, Flash) {
                 var self = this;
 
                 self.user = null;
@@ -22,16 +23,21 @@
  				function loadCurrentUser() {
                     // Carga los datos del usuario actual
             		User.GetByUsername($rootScope.globals.currentUser.username)
-                		.then(function (user) {
-                    		self.user = user;
+                		.then(function (response) {
+                    		self.user = response;
                 	});
         		}
 
         		function loadUsers() {
                     // Obtenemos 10 usuarios
         			User.Get(10)
-        				.then(function(users) {
-        					self.users = users.results;
+        				.then(function(response) {
+                            if(response.success) {
+                                self.users = response.results;
+                            }
+                            else {
+                                Flash.Error(response.message);
+                            }
         			});
         		}
             }
