@@ -23,7 +23,12 @@
             return service;
 
             function Get(users) {
-                return $http.get('https://randomuser.me/api/?results=' + users + '&nat=es')
+                // Con $http
+                // return $http.get('https://randomuser.me/api/?results=' + users + '&nat=es')
+                //     .then(handleSuccess, handleError('Error getting users'));
+
+                // Con jQuery
+                return $.when($.ajax('https://randomuser.me/api/?results=' + users + '&nat=es'))
                     .then(handleSuccess, handleError('Error getting users'));
             }
 
@@ -48,7 +53,9 @@
             }
 
             function handleSuccess(res) {
-                return res.data;
+                // Con $http los datos están en res.data
+                // Con jQuery los datos están en res
+                return res.data || res;
             }
 
             function handleError(error) {
