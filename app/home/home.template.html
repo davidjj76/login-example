@@ -1,0 +1,25 @@
+<header>
+	<p class="right"><a href="#!/login" class="btn btn-primary">Logout</a></p>
+    <h1>Hi {{$ctrl.user.name}}!</h1>
+    <p>You're logged in!!</p>
+</header>
+<section>
+    <header>
+        <h3>{{$ctrl.users.length}} registered users:</h3>
+    </header>
+    <ul>
+        <li class="users_list" ng-repeat="user in $ctrl.users">
+            <article class="card">
+            	<div class="details">
+            		<figure class="user_photo horizontal_center">
+            			<img ng-src="{{user.picture.large}}">
+            		</figure>
+            		<p class="user_title">Name</p>
+            		<p class="user_value">{{user.name.first}} {{user.name.last}}</p>
+            		<p class="user_title">Email</p>
+            		<p class="user_value">{{user.email}}</p>
+            	</div>
+            </article>
+        </li>
+    </ul>
+</section>
